@@ -2,7 +2,12 @@
 <?php 
 if(isset($_POST['submit'])){
     $check = validate();
-    if($check) header('Location: /summary.php?name='.$_POST["name"].'&category='.$_POST["category"].'&price='.$_POST["price"].'&supplier='.$_POST["supplier"]);
+    echo $_SERVER['REQUEST_URI'];
+    $uri = explode("/", $_SERVER['REQUEST_URI']);
+    $total = count($uri);
+    $uri[$total-1] = "summary.php";
+    $uri = implode($uri, "/");
+    if($check) header('Location: '.$uri.'?name='.$_POST["name"].'&category='.$_POST["category"].'&price='.$_POST["price"].'&supplier='.$_POST["supplier"]);
 } 
 ?>
 <!DOCTYPE html>
