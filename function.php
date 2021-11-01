@@ -40,7 +40,4 @@
         if($name && $category && $unitPrice) return true;
         else return false;
     }
-    if(isset($_POST['submit'])){
-        validate();
-    }
 ?>

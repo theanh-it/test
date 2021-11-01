@@ -1,4 +1,10 @@
 <?php require_once('function.php'); ?>
+<?php 
+if(isset($_POST['submit'])){
+    $check = validate();
+    if($check) header('Location: /summary.php?name='.$_POST["name"].'&category='.$_POST["category"].'&price='.$_POST["price"].'&supplier='.$_POST["supplier"]);
+} 
+?>
 <!DOCTYPE html>
 <html>
 <head>    
@@ -11,25 +17,12 @@
     <link rel="stylesheet" href="product.css" type="text/css" media="all">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        input{
-            width: 100% !important;
-        }
-        .error{
-            color: white;
-            background-color: red;
-            font-family: sans-serif;
-            margin-top: 5px;
-            font-size: 15px;
-        }
-    </style>    
 </head>
 <body>
 <div class ="main">
 <div class ="form">
     <h2>Add product</h2>
     <form id="form" method="post">
-        <br> 
         <label>Name:</label>
         <input type="text" name="name" id="name" placeholder="Enter product name">
         <p class="error"><?php if(isset($errors["name"])) echo $errors["name"]; ?></p>
@@ -47,23 +40,11 @@
         <option value="Pavlova, Ltd.">Pavlova, Ltd</option>
         <option value="Exotic Liquids">Exotic Liquids</option>
         <option value="HotNCold">HotNCold</option>
-        
         <br><br><br>
-        <input type="submit" name="submit" value="Submit" id="submit" class="btn">
-
-            
+        <input type="submit" name="submit" value="Submit" id="submit" class="btn">           
         </select>
-
     </form>
 </div>    
-
 </div>
-
-
-
-
-
 </body>
-
-
-</html>Mp[]
+</html>
