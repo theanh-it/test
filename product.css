@@ -104,5 +104,14 @@ input#submit {
 }
 .errors{
     color: red;
-
+}
+input{
+    width: 100% !important;
+}
+.error{
+    color: white;
+    background-color: red;
+    font-family: sans-serif;
+    margin-top: 5px;
+    font-size: 15px;
 }

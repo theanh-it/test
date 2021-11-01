@@ -1,40 +1,46 @@
 <?php
-
-function displayError($errors, $name) {
-    if(isset($errors[$name]))
-        echo "<div style='color: red; display: inline-block;'>{$errors[$name]}</div>";
-}
-
-function redirect($location) {
-    header("Location: $location");
-    exit();
-}
-$name = $category = $supplier = $price = "";
-function checkFields($form) {
     $errors = [];
-
-    $key = 'name';
-    if(!isset($form[$key]) || preg_match('/^\s*$/', $form[$key]) === 1)
-        $errors[$key] = 'name is required.';
-
-    $key = 'category';
-    if(!isset($form[$key]) || preg_match('/^\s*$/', $form[$key]) === 1)
-        $errors[$key] = 'Category input is required';
-    else if (!preg_match("/^Beverages$/", $form[$key]))
-    {
-        $errors[$key] = 'Category input is required';
+    function name(){
+        if(!$_POST['name']){
+            $GLOBALS['errors']["name"] = "Vui lòng nhập tên sản phẩm!";
+            return false;
+        }
+        return true;
     }
-
-    $key = 'price';
-    if(!isset($form[$key]) || is_int($form[$key])===0)
-        $errors[$key] = 'Please enter a valid price';
-
-    if(count($errors) === 0) {
-        redirect("summary.php");
+    function category(){
+        if(!$_POST['category']) {
+            $GLOBALS['errors']["category"] = "Vui lòng chọn danh mục!";
+            return false;
+        }
+        if($_POST['category'] != "Beverages") {
+            $GLOBALS['errors']["category"] = "Phải là Beverages!";
+            return false;
+        }
+        return true;
     }
-
-    return $errors;
-}
+    function unitPrice(){
+        if(!$_POST['price']) {
+            $GLOBALS['errors']["price"] = "Vui lòng nhập đơn giá!" ;
+            return false;
+        }
+        if(!is_numeric($_POST['price'])) {
+            $GLOBALS['errors']["price"] = "Phải là số!" ;
+            return false;
+        }
+        if($_POST['price'] < 0) {
+            $GLOBALS['errors']["price"] = "Phải là số Dương!" ;
+            return false;
+        }
+        return true;
+    }
+    function validate(){
+        $name       = name();
+        $category   = category();
+        $unitPrice  = unitPrice();
+        if($name && $category && $unitPrice) return true;
+        else return false;
+    }
+    if(isset($_POST['submit'])){
+        validate();
+    }
 ?>
-
-
