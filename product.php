@@ -42,8 +42,7 @@
         else return false;
     }
     if(isset($_POST['submit'])){
-        print_r(validate());
-        print_r($errors);
+        validate();
     }
 ?>
 <!DOCTYPE html>
